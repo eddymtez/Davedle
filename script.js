@@ -22,13 +22,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     start();
     input();
+    
 
 });
 
 
 function start() {
+
     const board = document.getElementById('board');
 
+    
     for (let i = 0; i < totalGuesses; i++) {
 
         const row = document.createElement('div');
@@ -50,16 +53,48 @@ function start() {
 
 function input() {
 
+    const board = document.getElementById('board');
+    const guessRow = totalGuesses - guessesRemaining;
+
+
     if (guessesRemaining === 0) {
 
         return;
 
     }
-    document.addEventListener('keydown', (e) => {
+    
+    const keys = document.getElementsByClassName('keyboard-button');
 
-    });
+    for (let i = 0; i < keys.length; i++) {
+
+        keys[i].addEventListener('click', (event) => {
+
+            keyPress(event);
+
+        })
+
+    }
+
+        
+}
+
+function keyPress(event) {
+
+    const board = document.getElementById('board');
+
+    const letter = event.target.textContent;
+
+    const guess = totalGuesses - guessesRemaining;
+
+    board.children[guess].children[nextLetter].innerText = letter;
+
+    nextLetter++;
+    
+
 
 }
+
+
 
 
 
