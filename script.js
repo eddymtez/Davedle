@@ -88,6 +88,8 @@ function keyPress(event) {
 
     board.children[guess].children[nextLetter].innerText = letter;
 
+    currentGuess.push(letter);
+
     nextLetter++;
     
 

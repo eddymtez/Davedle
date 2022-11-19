@@ -8,6 +8,7 @@ export const words = [
     'bread',
     'pratt',
     'utini',
+    'snacks',
     'maclunkey'
     
 ]
