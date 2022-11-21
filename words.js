@@ -1,7 +1,7 @@
 export const words = [
     'albon',
     'radon',
-    'paint',
+    'paint', 
     'indie',
     'colin',
     'claire',
@@ -9,6 +9,6 @@ export const words = [
     'pratt',
     'utini',
     'snacks',
-    'maclunkey'
+    'maclunkey' 
     
 ]

@@ -2,13 +2,7 @@ import { words } from "./words.js";
 
 const answer = words[Math.floor(Math.random() * words.length)];
 
-let totalGuesses;
-
-if (answer.length >= 8) {
-    totalGuesses = 7;
-} else {
-    totalGuesses = 6;
-}
+let totalGuesses = 6;
 
 
 let guessesRemaining = totalGuesses;
@@ -16,7 +10,7 @@ let currentGuess = [];
 let nextLetter = 0;
 let gameWon = false;
 
-
+game();
 
 function game() {
 
@@ -54,6 +48,20 @@ function start() {
 
     }
 
+    //phantom final row
+    const row = document.createElement('div');
+    row.classList.add('phantom-row');
+
+    for (let j = 0; j < answer.length; j++) {
+
+        const box = document.createElement('div');
+        box.classList.add('phantom-box');
+        row.appendChild(box);
+
+    }
+    
+    board.appendChild(row);
+
 }
 
 function input() {
@@ -85,31 +93,46 @@ function input() {
 
 function keyPress(event) {
 
+    if (guessesRemaining > 0) {
 
+        const board = document.getElementById('board');
 
-    const board = document.getElementById('board');
+        const letter = event.target.textContent;
 
-    const letter = event.target.textContent;
+        const guess = totalGuesses - guessesRemaining;
 
-    const guess = totalGuesses - guessesRemaining;
+        const rowLength = answer.length;
 
-    const rowLength = answer.length - 1;
+        if (letter === 'Del') {
 
-
-    if (nextLetter >= rowLength && letter == 'Enter') {
-
-        checkGuess(guess, board);
-        return;
-
-    }
-
-
-    board.children[guess].children[nextLetter].innerText = letter;
-
-    currentGuess.push(letter);
-
-    nextLetter++;
+            if (nextLetter > 0) {
+                board.children[guess].children[nextLetter-1].innerText = '';
+                currentGuess.pop();
+                nextLetter--;
+            }
     
+        } else if (letter === 'Enter') {
+
+            if (nextLetter === rowLength) {
+                
+                checkGuess(guess, board);
+            
+            }
+
+        } else {
+        
+
+            if (nextLetter < rowLength) {
+
+                board.children[guess].children[nextLetter].innerText = letter;
+                currentGuess.push(letter);
+                nextLetter++;
+
+            }
+                
+        }
+    }
+     
 }
 
 function checkGuess(guess, board) {
@@ -122,21 +145,28 @@ function checkGuess(guess, board) {
         if (answerArray[i] === currentGuess[i]){
 
             board.children[guess].children[i].classList.add('correct-guess');
+            document.getElementById(`${currentGuess[i]}`).classList.add('keyboard-correct');
             correctGuesses++;
 
-        } 
-        
-        if (answerArray.includes(currentGuess[i])) {
+        } else if (answerArray.includes(currentGuess[i])) {
 
             board.children[guess].children[i].classList.add('right-guess');
+            document.getElementById(`${currentGuess[i]}`).classList.add('keyboard-right');
+
+        } else {
+
+            board.children[guess].children[i].classList.add('letter-used');
+            document.getElementById(`${currentGuess[i]}`).classList.add('keyboard-used');
+
         }
 
-        
         if (correctGuesses === answer.length) {
 
+            gameWon = true;
             win();
 
         }
+        
     }
 
     reset();
@@ -148,7 +178,7 @@ function win() {
     alert("You win!")
 
     //create button for new game
-    let button = document.createElement
+    //let button = document.createElement
 
 }
 
