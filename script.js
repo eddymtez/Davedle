@@ -202,7 +202,11 @@ function win() {
     alert("You win!")
 
     //create button for new game
-    //let button = document.createElement
+    let button = document.createElement('button');
+    button.innerHTML = 'Play again';
+    button.style.marginTop = '10px';
+    button.addEventListener('click', game());
+    document.querySelector('#keyboard-cont').appendChild(button);
 
 }
 
