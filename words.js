@@ -1,5 +1,6 @@
 export const words = [
     'utini',
+    'lily',
     'albon',
     'radon',
     'paint', 
