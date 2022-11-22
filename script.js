@@ -28,7 +28,7 @@ function game() {
 
 function start() {
 
-    const board = document.getElementById('board');
+    const board = document.querySelector('#board');
 
     
     for (let i = 0; i < totalGuesses; i++) {
@@ -66,7 +66,7 @@ function start() {
 
 function input() {
 
-    const board = document.getElementById('board');
+    const board = document.querySelector('board');
     const guessRow = totalGuesses - guessesRemaining;
 
 
@@ -95,7 +95,7 @@ function keyPress(event) {
 
     if (guessesRemaining > 0) {
 
-        const board = document.getElementById('board');
+        const board = document.querySelector('#board');
 
         const letter = event.target.textContent;
 
@@ -145,18 +145,18 @@ function checkGuess(guess, board) {
         if (answerArray[i] === currentGuess[i]){
 
             board.children[guess].children[i].classList.add('correct-guess');
-            document.getElementById(`${currentGuess[i]}`).classList.add('keyboard-correct');
+            document.querySelector(`#${currentGuess[i]}`).classList.add('keyboard-correct');
             correctGuesses++;
 
         } else if (answerArray.includes(currentGuess[i])) {
 
             board.children[guess].children[i].classList.add('right-guess');
-            document.getElementById(`${currentGuess[i]}`).classList.add('keyboard-right');
+            document.querySelector(`#${currentGuess[i]}`).classList.add('keyboard-right');
 
         } else {
 
             board.children[guess].children[i].classList.add('letter-used');
-            document.getElementById(`${currentGuess[i]}`).classList.add('keyboard-used');
+            document.querySelector(`#${currentGuess[i]}`).classList.add('keyboard-used');
 
         }
 
