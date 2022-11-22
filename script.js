@@ -114,6 +114,8 @@ function keyboardAssignment(event) {
     if (event.key) {
         if (event.key == 'Backspace' || event.key == 'Delete') {
             return 'Del';
+        } else if (event.key == 'Enter') {
+            return 'Ent'
         } else {
             return event.key;
         }
@@ -140,7 +142,7 @@ function keyPress(event) {
                 nextLetter--;
             }
     
-        } else if (letter === 'Enter') {
+        } else if (letter === 'Ent') {
 
             if (nextLetter === rowLength) {
                 
