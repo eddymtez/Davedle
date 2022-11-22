@@ -2,7 +2,7 @@ import { words } from "./words.js";
 
 const answer = words[Math.floor(Math.random() * words.length)];
 
-let totalGuesses = 6;
+let totalGuesses = 1;
 
 
 let guessesRemaining = totalGuesses;
@@ -66,7 +66,7 @@ function start() {
 
 function input() {
 
-    const board = document.querySelector('board');
+    const board = document.querySelector('#board');
     const guessRow = totalGuesses - guessesRemaining;
 
 
@@ -171,7 +171,12 @@ function checkGuess(guess, board) {
 
     reset();
 
-    checkLoss(board);
+    if (!gameWon) {
+
+        checkLoss(board);
+
+    }
+    
     
 }
 
@@ -182,10 +187,17 @@ function checkLoss(board) {
         for (let i = 0; i < answer.length; i++) {
 
             const letter = answer.charAt(i)
-            board.lastElementChild.children[i].innerText = letter;
-            const keyColor = document.querySelector
-            
+            const elem = board.lastElementChild.children[i];
+            elem.innerText = letter;
+            elem.style.border = '2px solid red';
+            const classList = document.querySelector(`#${letter}`).classList;
 
+            if (classList.contains('keyboard-correct')){
+                elem.classList.add('keyboard-correct');
+            } else if (classList.contains('keyboard-right')){
+                elem.classList.add('keyboard-right');
+            }      
+            
         }
 
     }
