@@ -7,29 +7,32 @@ let currentGuess;
 let nextLetter;
 let gameWon;
 
-game();
+
+document.addEventListener('DOMContentLoaded', () =>{
+
+    game();
+
+});
 
 function game() {
 
     answer = words[Math.floor(Math.random() * words.length)];
-    totalGuesses = 1;
+    totalGuesses = 6;
     guessesRemaining = totalGuesses;
     currentGuess = [];
     nextLetter = 0;
     gameWon = false;
 
-    document.addEventListener('DOMContentLoaded', () => {
-
-        start();
-        input();
-        
-    });
-
+    start();
+    input();
+   
 }
 
 function start() {
 
     const board = document.querySelector('#board');
+
+    clearBoard(board);
 
     for (let i = 0; i < totalGuesses; i++) {
 
@@ -64,10 +67,27 @@ function start() {
 
 }
 
+function clearBoard(board) {
+
+    if (board.children.length > 0) {
+
+        while (board.firstChild) {
+            board.removeChild(board.firstChild);
+        }
+    }
+
+}
+
 function input() {
 
     const board = document.querySelector('#board');
     const guessRow = totalGuesses - guessesRemaining;
+
+    document.addEventListener('keydown', event => {
+
+        keyPress(event);
+
+    });
 
     if (guessesRemaining === 0) {
 
@@ -89,12 +109,26 @@ function input() {
   
 }
 
+function keyboardAssignment(event) {
+
+    if (event.key) {
+        if (event.key == 'Backspace' || event.key == 'Delete') {
+            return 'Del';
+        } else {
+            return event.key;
+        }
+    } else {
+        return event.target.textContent;            
+    }
+
+}
+
 function keyPress(event) {
 
     if (guessesRemaining > 0) {
 
         const board = document.querySelector('#board');
-        const letter = event.target.textContent;
+        const letter = keyboardAssignment(event);
         const guess = totalGuesses - guessesRemaining;
         const rowLength = answer.length;
 
@@ -193,6 +227,8 @@ function checkLoss(board) {
             
         }
 
+        playAgain();
+
     }
 
 }
@@ -200,16 +236,26 @@ function checkLoss(board) {
 function win() {
 
     alert("You win!")
-
-    //create button for new game
-    let button = document.createElement('button');
-    button.innerHTML = 'Play again';
-    button.style.marginTop = '10px';
-    button.addEventListener('click', game());
-    document.querySelector('#keyboard-cont').appendChild(button);
+    playAgain();
+    
 
 }
 
+function playAgain() {
+
+    let button = document.createElement('button');
+    button.innerHTML = 'Play again';
+    button.style.marginTop = '10px';
+    button.addEventListener('click', (event) => {
+
+        if (event.target.textContent == 'Play again') {
+            location.reload();
+        }
+
+    });
+    document.querySelector('#keyboard-cont').appendChild(button);
+
+}
 function reset() {
 
     currentGuess = [];
