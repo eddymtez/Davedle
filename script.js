@@ -170,7 +170,26 @@ function checkGuess(guess, board) {
     }
 
     reset();
+
+    checkLoss(board);
     
+}
+
+function checkLoss(board) {
+
+    if (!guessesRemaining) {
+
+        for (let i = 0; i < answer.length; i++) {
+
+            const letter = answer.charAt(i)
+            board.lastElementChild.children[i].innerText = letter;
+            const keyColor = document.querySelector
+            
+
+        }
+
+    }
+
 }
 
 function win() {
