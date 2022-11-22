@@ -1,36 +1,36 @@
 import { words } from "./words.js";
 
-const answer = words[Math.floor(Math.random() * words.length)];
-
-let totalGuesses = 1;
-
-
-let guessesRemaining = totalGuesses;
-let currentGuess = [];
-let nextLetter = 0;
-let gameWon = false;
+let answer;
+let totalGuesses;
+let guessesRemaining;
+let currentGuess;
+let nextLetter;
+let gameWon;
 
 game();
 
 function game() {
 
+    answer = words[Math.floor(Math.random() * words.length)];
+    totalGuesses = 1;
+    guessesRemaining = totalGuesses;
+    currentGuess = [];
+    nextLetter = 0;
+    gameWon = false;
 
     document.addEventListener('DOMContentLoaded', () => {
 
         start();
         input();
         
-
     });
 
 }
-
 
 function start() {
 
     const board = document.querySelector('#board');
 
-    
     for (let i = 0; i < totalGuesses; i++) {
 
         const row = document.createElement('div');
@@ -69,7 +69,6 @@ function input() {
     const board = document.querySelector('#board');
     const guessRow = totalGuesses - guessesRemaining;
 
-
     if (guessesRemaining === 0) {
 
         return;
@@ -87,8 +86,7 @@ function input() {
         })
 
     }
-
-        
+  
 }
 
 function keyPress(event) {
@@ -96,11 +94,8 @@ function keyPress(event) {
     if (guessesRemaining > 0) {
 
         const board = document.querySelector('#board');
-
         const letter = event.target.textContent;
-
         const guess = totalGuesses - guessesRemaining;
-
         const rowLength = answer.length;
 
         if (letter === 'Del') {
@@ -121,7 +116,6 @@ function keyPress(event) {
 
         } else {
         
-
             if (nextLetter < rowLength) {
 
                 board.children[guess].children[nextLetter].innerText = letter;
@@ -176,8 +170,7 @@ function checkGuess(guess, board) {
         checkLoss(board);
 
     }
-    
-    
+     
 }
 
 function checkLoss(board) {
