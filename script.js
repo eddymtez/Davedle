@@ -154,7 +154,7 @@ function keyPress(event) {
 
         } else {
         
-            if (nextLetter < rowLength && letter != '') {
+            if (nextLetter < rowLength && letter != '' && !gameWon) {
 
                 board.children[guess].children[nextLetter].innerText = letter;
                 currentGuess.push(letter);
