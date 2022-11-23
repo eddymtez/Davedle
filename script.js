@@ -193,7 +193,8 @@ function checkGuess(guess, board) {
         if (correctGuesses === answer.length) {
 
             gameWon = true;
-            win();
+            //Small Delay to allow green to render for win condition
+            setTimeout(win, 1);
 
         }
         
