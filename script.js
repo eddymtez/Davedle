@@ -116,8 +116,10 @@ function keyboardAssignment(event) {
             return 'Del';
         } else if (event.key == 'Enter') {
             return 'Ent'
+        } else if (event.key.length == 1 && event.key.match(/[a-z]/i)) {
+            return event.key.toLowerCase();
         } else {
-            return event.key;
+            return '';
         }
     } else {
         return event.target.textContent;            
@@ -152,7 +154,7 @@ function keyPress(event) {
 
         } else {
         
-            if (nextLetter < rowLength) {
+            if (nextLetter < rowLength && letter != '') {
 
                 board.children[guess].children[nextLetter].innerText = letter;
                 currentGuess.push(letter);
