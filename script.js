@@ -7,7 +7,6 @@ let currentGuess;
 let nextLetter;
 let gameWon;
 
-
 document.addEventListener('DOMContentLoaded', () =>{
 
     game();
@@ -36,39 +35,8 @@ function start() {
 
     createRows('letter-row', 'letter-box', totalGuesses, answer.length);
 
-    // for (let i = 0; i < totalGuesses; i++) {
-
-    //     const row = document.createElement('div');
-    //     row.classList.add('letter-row');
-
-    //     for (let j = 0; j < answer.length; j++) {
-
-    //         const box = document.createElement('div');
-    //         box.classList.add('letter-box');
-    //         row.appendChild(box);
-            
-    //     }
-
-    //     board.appendChild(row);
-
-    // }
-
-    //phantom final row
-
     createRows('phantom-row', 'phantom-box', 1, answer.length);
-    // const row = document.createElement('div');
-    // row.classList.add('phantom-row');
-
-    // for (let j = 0; j < answer.length; j++) {
-
-    //     const box = document.createElement('div');
-    //     box.classList.add('phantom-box');
-    //     row.appendChild(box);
-
-    // }
-    
-    // board.appendChild(row);
-
+   
 }
 
 function createRows(rowName, boxName, rowAmount, rowLength) {
@@ -120,7 +88,7 @@ function input() {
 
     }
     
-    const keys = document.getElementsByClassName('keyboard-button');
+    const keys = document.querySelector('#keyboard-button');
 
     for (let i = 0; i < keys.length; i++) {
 
@@ -128,7 +96,7 @@ function input() {
 
             keyPress(event);
 
-        })
+        });
 
     }
   
@@ -268,7 +236,6 @@ function win() {
     alert("You win!")
     playAgain();
     
-
 }
 
 function playAgain() {
@@ -293,7 +260,3 @@ function reset() {
     nextLetter = 0;
 
 }
-
-
-
-
